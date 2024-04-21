@@ -3,8 +3,8 @@
 #include <cstdlib>
 #include <verilated.h>
 #include <verilated_vcd_c.h>
-#include "VLittleCpu.h"
-#include "VLittleCpu___024root.h"
+#include "Vlittle_cpu.h"
+#include "Vlittle_cpu___024root.h"
 
 #define MAX_SIM_TIME 300
 #define VERIF_START_TIME 7
@@ -15,12 +15,12 @@ int main(int argc, char **argv, char **env)
 {
     srand(time(NULL));
     Verilated::commandArgs(argc, argv);
-    VLittleCpu *dut = new VLittleCpu;
+    Vlittle_cpu *dut = new Vlittle_cpu;
 
     Verilated::traceEverOn(true);
     VerilatedVcdC *m_trace = new VerilatedVcdC;
     dut->trace(m_trace, 5);
-    m_trace->open("waveform.vcd");
+    m_trace->open("wv_little_cpu.vcd");
 
     while (sim_time < MAX_SIM_TIME)
     {
