@@ -5,6 +5,7 @@ module little_cpu (
 
 register #(BITS=16) inst_reg( );
 
+p1       pc_plus_one        ( );
 
 mux_2    mx_p1_inst_rg      ( );
 register prog_ctr           ( );
