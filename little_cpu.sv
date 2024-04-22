@@ -4,7 +4,6 @@ module little_cpu #(parameter BITS=16)(
 );
 
 
-
 control ctrl( 
     .i_opcode(), //8bit
     .i_clk(i_clk),
