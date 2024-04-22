@@ -1,4 +1,4 @@
-module register #(parameter BITS = 16) (
+module register #(parameter BITS = 8) (
     input  wire            i_ld, 
     input  wire [BITS-1:0] i_data, 
     output wire [BITS-1:0] o_data
