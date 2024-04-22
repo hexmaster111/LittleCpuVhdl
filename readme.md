@@ -1,5 +1,6 @@
 ## WIP little cpu based off of [slides im getting the understanding for this from](https://www.slideshare.net/n380/elementary-processor-tutorial)
 
+## [Good stuff ive been reading too](https://inst.eecs.berkeley.edu/~cs150/sp12/resources/FSM.pdf)
 
 
 
