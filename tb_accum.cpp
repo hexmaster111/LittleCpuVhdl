@@ -4,7 +4,6 @@
 #include <verilated.h>
 #include <verilated_vcd_c.h>
 #include "Vaccum.h"
-#include "Vaccum___024root.h"
 
 #define MAX_SIM_TIME 300
 #define VERIF_START_TIME 7

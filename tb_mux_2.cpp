@@ -4,7 +4,6 @@
 #include <verilated.h>
 #include <verilated_vcd_c.h>
 #include "Vmux_2.h"
-#include "Vmux_2___024root.h"
 
 #define MAX_SIM_TIME 300
 #define VERIF_START_TIME 7

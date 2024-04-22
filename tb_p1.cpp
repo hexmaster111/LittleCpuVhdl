@@ -4,7 +4,6 @@
 #include <verilated.h>
 #include <verilated_vcd_c.h>
 #include "Vp1.h"
-#include "Vp1___024root.h"
 
 #define MAX_SIM_TIME 300
 #define VERIF_START_TIME 7
