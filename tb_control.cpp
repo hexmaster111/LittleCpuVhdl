@@ -5,7 +5,7 @@
 #include <verilated_vcd_c.h>
 #include "Vcontrol.h"
 
-#define MAX_SIM_TIME 300
+#define MAX_SIM_TIME 100
 #define VERIF_START_TIME 7
 vluint64_t sim_time = 0;
 vluint64_t posedge_cnt = 0;
@@ -20,7 +20,7 @@ int main(int argc, char **argv, char **env)
     VerilatedVcdC *m_trace = new VerilatedVcdC;
     dut->trace(m_trace, 5);
     m_trace->open("wv_control.vcd");
-
+    dut->i_clk = 1;
     while (sim_time < MAX_SIM_TIME)
     {
         dut->i_clk = !dut->i_clk;
