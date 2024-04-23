@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 echo "### Verlating ###"
 verilator --Wall --trace -cc accum.sv --exe tb_accum.cpp
 echo "### BUILDING ###"

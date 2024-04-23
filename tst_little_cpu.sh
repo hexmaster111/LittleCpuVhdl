@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 echo "### Verlating ###"
 verilator --Wall --trace -cc little_cpu.sv --exe tb_little_cpu.cpp
 echo "### BUILDING ###"

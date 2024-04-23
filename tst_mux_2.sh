@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 echo "### Verlating ###"
 verilator --Wall --trace -cc mux_2.sv --exe tb_mux_2.cpp
 echo "### BUILDING ###"

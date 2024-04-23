@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 echo "### Verlating ###"
 verilator --Wall --trace -cc memory.sv --exe tb_memory.cpp
 echo "### BUILDING ###"
