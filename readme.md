@@ -67,7 +67,17 @@ state EXE {
     }
 
     state XOR {
-        [*] --> m
+        X0 : MX_PC_IDR to IDR
+        X1 : LD MAR
+        X2 : LD MDR && ALU XOR
+        X3 : MX_IRD_ALUR to ALUR
+        X4 : LD ACCM
+        [*] --> X0
+        X0 --> X1
+        X1 --> X2
+        X2 --> X3
+        X3 --> X4
+        X4 --> [*]
     }
 
     state STO {
