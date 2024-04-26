@@ -16,3 +16,62 @@
 | LOD  | h4  | `ACC <- MEM[ADDR]`            |
 | JMP  | h5  | `PC <- ADDR`                  |
 | JMZ  | h6  | `IF ACC == 0 THEN PC <- ADDR` |
+
+
+``` mermaid
+stateDiagram-v2
+
+[*] --> FETCH
+FETCH --> EXE
+EXE --> INC
+INC --> FETCH
+
+state FETCH {
+    [*] --> fjdksl
+}
+
+state EXE {
+    [*] --> ADD
+    [*] --> XOR
+    [*] --> STO
+    [*] --> LOD
+    [*] --> JMP
+    [*] --> JMZ
+
+    ADD --> [*]
+    XOR --> [*]
+    STO --> [*]
+    LOD --> [*]
+    JMP --> [*]
+    JMZ --> [*]
+
+    state ADD{
+        [*] -->a 
+    }
+
+    state XOR{
+        [*] --> m
+    }
+
+    state STO{
+        [*] --> e
+    }
+
+    state LOD{
+        [*] --> s
+    }
+
+    state JMP{
+        [*] --> af
+    }
+
+    state JMZ{
+        [*] --> x
+    }
+}
+
+state INC {
+    [*] --> fjdkslfds
+}
+
+```
