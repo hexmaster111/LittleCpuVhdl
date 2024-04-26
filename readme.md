@@ -56,7 +56,7 @@ state EXE {
         A0 : MX_PC_IDR to IDR
         A1 : LD MAR
         A2 : LD MDR && ALU ADD
-        A3 : MX_IRD_ALUR to ALUR
+        A3 : MX_MDR_ALUR to ALUR
         A4 : LD ACCM
         [*] --> A0
         A0 --> A1
@@ -70,7 +70,7 @@ state EXE {
         X0 : MX_PC_IDR to IDR
         X1 : LD MAR
         X2 : LD MDR && ALU XOR
-        X3 : MX_IRD_ALUR to ALUR
+        X3 : MX_MDR_ALUR to ALUR
         X4 : LD ACCM
         [*] --> X0
         X0 --> X1
@@ -81,11 +81,29 @@ state EXE {
     }
 
     state STO {
-        [*] --> e
+        STO0 : MX_PC_IDR to IDR
+        STO1 : LD MAR
+        STO2 : MEM WE
+
+        [*] --> STO0
+        STO0 --> STO1
+        STO1 --> STO2
+        STO2 --> [*]
     }
 
     state LOD {
-        [*] --> s
+        LOD0 : MX_PC_IDR to IDR
+        LOD1 : LD MAR
+        LOD2 : LD MDR
+        LOD3 : MX_MDR_ALUR to MDR
+        LOD4 : LD ACC
+        
+        [*] --> LOD0
+        LOD0 --> LOD1
+        LOD1 --> LOD2
+        LOD2 --> LOD3
+        LOD3 --> LOD4
+        LOD4 --> [*]
     }
 
     state JMP {
