@@ -27,7 +27,14 @@ EXE --> INC
 INC --> FETCH
 
 state FETCH {
-    [*] --> fjdksl
+    F0 : MX_PC_IRD to IRD 
+    F1 : LD MAR
+    F2 : LD MDR
+    F3 : LD IR
+    
+    [*] --> F0
+    F1 --> F2
+    F3 --> [*]
 }
 
 state EXE {
@@ -46,7 +53,17 @@ state EXE {
     JMZ --> [*]
 
     state ADD {
-        [*] --> a 
+        A0 : MX_PC_IDR to IDR
+        A1 : LD MAR
+        A2 : LD MDR && ALU ADD
+        A3 : MX_IRD_ALUR to ALUR
+        A4 : LD ACCM
+        [*] --> A0
+        A0 --> A1
+        A1 --> A2
+        A2 --> A3
+        A3 --> A4
+        A4 --> [*]
     }
 
     state XOR {
@@ -71,7 +88,11 @@ state EXE {
 }
 
 state INC {
-    [*] --> fjdkslfds
+    I0 : MX_IR_P1 to P1 
+    I1 : PC_LD
+    [*] --> I0
+    I0 --> I1
+    I1 --> [*]
 }
 
 ```
