@@ -45,27 +45,27 @@ state EXE {
     JMP --> [*]
     JMZ --> [*]
 
-    state ADD{
-        [*] -->a 
+    state ADD {
+        [*] --> a 
     }
 
-    state XOR{
+    state XOR {
         [*] --> m
     }
 
-    state STO{
+    state STO {
         [*] --> e
     }
 
-    state LOD{
+    state LOD {
         [*] --> s
     }
 
-    state JMP{
+    state JMP {
         [*] --> af
     }
 
-    state JMZ{
+    state JMZ {
         [*] --> x
     }
 }
