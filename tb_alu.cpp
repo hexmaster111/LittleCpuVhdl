@@ -21,10 +21,13 @@ int main(int argc, char **argv, char **env)
     dut->trace(m_trace, 5);
     m_trace->open("wv_alu.vcd");
 
+#define ALU_ADD 1
+#define ALU_XOR 0
+
     while (sim_time < MAX_SIM_TIME)
     {
 
-        dut->i_add = (sim_time >= 20) ? 1 : 0;
+        dut->i_op = (sim_time >= 20) ? ALU_ADD : ALU_XOR;
 
         if (sim_time >= 10)
         {
@@ -42,7 +45,7 @@ int main(int argc, char **argv, char **env)
         {
             dut->i_l = 5;
             dut->i_r = 4;
-            dut->i_add = 0;
+            dut->i_op = ALU_XOR;
         }
 
         dut->eval();
