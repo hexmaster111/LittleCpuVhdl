@@ -36,7 +36,7 @@ int main(int argc, char **argv, char **env)
 
         if (sim_time > 12)
             dut->i_rw = 1;
-        if (sim_time > 13)
+        if (sim_time > 14)
         {
             dut->i_rw = 0;
             dut->i_data = 0x00;
@@ -50,7 +50,7 @@ int main(int argc, char **argv, char **env)
 
         if (sim_time > 20)
             dut->i_addr = 0x05;
-
+        dut->i_clk = !dut->i_clk;
         dut->eval();
         m_trace->dump(sim_time);
         sim_time++;

@@ -3,10 +3,12 @@
 /* verilator lint_off UNUSED */
 /* verilator lint_off UNDRIVEN */
 module control (
-    input  wire [3:0] i_opcode,
+    input  wire [7:0] i_opcode,
     input  wire i_clk,
     input  wire i_rst,
     input  wire i_acc_zero,
+
+    output reg o_mem_rw,
 
     output reg o_ld_mdr,
     output reg o_ld_mar,
@@ -56,8 +58,7 @@ always @(*) begin
         S_Fetch_0:begin
            next_state = S_Fetch_1;
            o_mux_pc_ird = 1;
-
-           o_ld_ir = 0;
+           o_ld_pc = 0;
            o_mux_ir_p1 = 0;
         end
 
@@ -127,7 +128,7 @@ always @(*) begin
             o_mux_ir_p1 = 1;
         end
         S_Inc_1:begin
-            o_ld_ir = 1;
+            o_ld_pc = 1;
             next_state = S_Fetch_0;
         end
 
