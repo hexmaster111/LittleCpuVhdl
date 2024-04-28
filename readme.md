@@ -116,9 +116,11 @@ state EXE {
         JMP1 --> [*]
     }
 
-    state JMZ {
-        
-        [*] --> x
+    state JMZ {  
+        state ACC_ZERO <<choice>>
+        [*] -->  ACC_ZERO
+        ACC_ZERO --> JMP
+        ACC_ZERO --> [*]
     }
 }
 
