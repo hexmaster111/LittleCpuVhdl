@@ -11,14 +11,19 @@ reg [BITS-1:0] regmem [0:MEMADDRS-1];
 
 
 initial begin
-    regmem[0] = 16'd123;
-    regmem[1] = 16'd123;
-    regmem[2] = 16'd124;
-    regmem[3] = 16'd125;
-    regmem[4] = 16'd126;
-    regmem[5] = 16'd127;
-    regmem[6] = 16'd128;
-    regmem[7] = 16'd129;
+    regmem[0] = 16'd0;
+    regmem[1] = 16'd0;
+    regmem[2] = 16'd0;
+    regmem[3] = 16'd6490;
+    regmem[4] = 16'd0;
+    regmem[5] = 16'd0;
+    regmem[6] = 16'd0;
+    regmem[7] = 16'd0;
+    regmem[8] = 16'd0;
+    regmem[9] = 16'd0;
+    regmem[10] = 16'd0;
+    regmem[11] = 16'd0;
+    regmem[12] = 16'd0;
 
 end
 

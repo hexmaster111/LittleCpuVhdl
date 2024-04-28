@@ -16,28 +16,29 @@ module control (
     output reg o_ld_acc,
     output reg o_ld_ir,
     /*on mux, 0 = first*/
-    output reg o_mux_ir_p1, // 0 = ir
-    output reg o_mux_mdr_alur, // 0 = mdr
-    output reg o_mux_pc_ird,
+    output reg o_mux_PC_to_ir_p1, // 0 = ir
+    output reg o_mux_ACC_to_mdr_alur, // 0 = mdr
+    output reg o_mux_MAR_to_pc_ird,
+
     output reg o_alu_ctrl
 );
     
 
 localparam  //State
-    S_Fetch_0    = 8'd1,
-    S_Fetch_1    = 8'd2,
-    S_Fetch_2    = 8'd3,
-    S_Fetch_3    = 8'd4,
-    S_Fetch_4    = 8'd5,
+    S_Fetch_0    = 8'd0,
+    S_Fetch_1    = 8'd1,
+    S_Fetch_2    = 8'd2,
+    S_Fetch_3    = 8'd3,
+    S_Fetch_4    = 8'd4,
     
     S_Inc_0      = 8'd10,
     S_Inc_1      = 8'd11,
 
-    S_Exe_Alu_0  = 8'd25,
-    S_Exe_Alu_1  = 8'd26,
-    S_Exe_Alu_2  = 8'd27,
-    S_Exe_Alu_3  = 8'd28,
-    S_Exe_Alu_4  = 8'd29;
+    S_Exe_Alu_0  = 8'd20,
+    S_Exe_Alu_1  = 8'd21,
+    S_Exe_Alu_2  = 8'd22,
+    S_Exe_Alu_3  = 8'd23,
+    S_Exe_Alu_4  = 8'd24;
 
 
 reg [7:0] current_state, next_state;
@@ -57,9 +58,10 @@ always @(*) begin
     case (current_state)
         S_Fetch_0:begin
            next_state = S_Fetch_1;
-           o_mux_pc_ird = 1;
-           o_ld_pc = 0;
-           o_mux_ir_p1 = 0;
+           o_ld_pc = 0;      //STOP PC LOAD FROM INC
+           o_mux_PC_to_ir_p1 = 0;  //set PC
+           
+           o_mux_MAR_to_pc_ird = 0; //set MAR
         end
 
         S_Fetch_1:begin
@@ -69,7 +71,7 @@ always @(*) begin
 
         S_Fetch_2:begin
            next_state = S_Fetch_3;
-           o_mux_pc_ird = 0;
+           o_mux_MAR_to_pc_ird = 0;
            o_ld_mar = 0;
            o_ld_mdr = 1;
         end
@@ -85,13 +87,16 @@ always @(*) begin
             case (i_opcode)
                 OP_add : next_state = S_Exe_Alu_0; 
                 OP_xor : next_state = S_Exe_Alu_0;
-                default: next_state = S_Fetch_0;
+                default: begin
+                    $display("INVALID OPCODE! %d -- noop", i_opcode);
+                    next_state = S_Inc_0;
+                end
             endcase
         end
 
         S_Exe_Alu_0:begin 
             next_state = S_Exe_Alu_1;
-            o_mux_pc_ird = 1;
+            o_mux_MAR_to_pc_ird = 1;
         end
         S_Exe_Alu_1:begin 
             next_state = S_Exe_Alu_2;
@@ -107,9 +112,9 @@ always @(*) begin
                 default: o_alu_ctrl = ALU_ADD; 
             endcase
              
-            o_mux_mdr_alur = 1;
+            o_mux_ACC_to_mdr_alur = 1;
             next_state = S_Exe_Alu_3;
-            o_mux_pc_ird = 0;
+            o_mux_MAR_to_pc_ird = 0;
         end
         S_Exe_Alu_3:begin 
             next_state = S_Exe_Alu_4;
@@ -118,14 +123,14 @@ always @(*) begin
         end
         S_Exe_Alu_4:begin
             o_ld_acc = 0; 
-            o_mux_mdr_alur = 0;
+            o_mux_ACC_to_mdr_alur = 0;
             next_state = S_Inc_0;
         end
         
     
         S_Inc_0:begin 
             next_state = S_Inc_1;
-            o_mux_ir_p1 = 1;
+            o_mux_PC_to_ir_p1 = 1;
         end
         S_Inc_1:begin
             o_ld_pc = 1;

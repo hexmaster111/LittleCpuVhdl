@@ -31,7 +31,7 @@ int main(int argc, char **argv, char **env)
 
         if (sim_time > 30)
             dut->i_ld = 1;
-        if (sim_time > 31)
+        if (sim_time > 32)
             dut->i_ld = 0;
 
         if (sim_time > 33)
@@ -44,6 +44,7 @@ int main(int argc, char **argv, char **env)
         if (sim_time > 37)
             dut->i_data = 0xF2;
 
+        dut->i_clk = !dut->i_clk;
         dut->eval();
         m_trace->dump(sim_time);
         sim_time++;

@@ -16,9 +16,9 @@ $timescale 1ps $end
   $var wire 1 ) o_ld_pc $end
   $var wire 1 * o_ld_acc $end
   $var wire 1 + o_ld_ir $end
-  $var wire 1 , o_mux_ir_p1 $end
-  $var wire 1 - o_mux_mdr_alur $end
-  $var wire 1 . o_mux_pc_ird $end
+  $var wire 1 , o_mux_PC_to_ir_p1 $end
+  $var wire 1 - o_mux_ACC_to_mdr_alur $end
+  $var wire 1 . o_mux_MAR_to_pc_ird $end
   $var wire 1 / o_alu_ctrl $end
   $scope module control $end
    $var wire 4 # i_opcode [3:0] $end
@@ -30,9 +30,9 @@ $timescale 1ps $end
    $var wire 1 ) o_ld_pc $end
    $var wire 1 * o_ld_acc $end
    $var wire 1 + o_ld_ir $end
-   $var wire 1 , o_mux_ir_p1 $end
-   $var wire 1 - o_mux_mdr_alur $end
-   $var wire 1 . o_mux_pc_ird $end
+   $var wire 1 , o_mux_PC_to_ir_p1 $end
+   $var wire 1 - o_mux_ACC_to_mdr_alur $end
+   $var wire 1 . o_mux_MAR_to_pc_ird $end
    $var wire 1 / o_alu_ctrl $end
    $var wire 8 2 S_Fetch_0 [7:0] $end
    $var wire 8 3 S_Fetch_1 [7:0] $end

@@ -1,0 +1,89 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Sun Apr 28 22:55:44 2024
+[*]
+[dumpfile] "/home/hailey/LittleCpuVhdl/wv_little_cpu.vcd"
+[dumpfile_mtime] "Sun Apr 28 22:51:51 2024"
+[dumpfile_size] 12586
+[savefile] "/home/hailey/LittleCpuVhdl/cpu.gtkw"
+[timestart] 19
+[size] 1668 1017
+[pos] -1 -1
+*-3.864947 41 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] little_cpu.
+[sst_width] 256
+[signals_width] 259
+[sst_expanded] 1
+[sst_vpaned_height] 286
+@28
+little_cpu.mem_addr_reg.i_clk
+@24
+little_cpu.ctrl.current_state[7:0]
+@20000
+-
+@28
+little_cpu.ctrl.o_mux_ACC_to_mdr_alur
+little_cpu.ctrl.o_mux_MAR_to_pc_ird
+little_cpu.ctrl.o_mux_PC_to_ir_p1
+little_cpu.ctrl.o_mem_rw
+@20000
+-
+@200
+-MAR
+@28
+[color] 1
+little_cpu.mem_addr_reg.i_ld
+@22
+little_cpu.mem_addr_reg.i_data[7:0]
+little_cpu.mem_addr_reg.value[7:0]
+@23
+[color] 3
+little_cpu.mem_addr_reg.o_data[7:0]
+@200
+-IR
+@28
+[color] 1
+little_cpu.inst_reg.i_ld
+@22
+little_cpu.inst_reg.i_data[15:0]
+little_cpu.inst_reg.value[15:0]
+@23
+[color] 3
+little_cpu.inst_reg.o_data[15:0]
+@200
+-ALU
+@28
+[color] 1
+little_cpu.alu.i_op
+@22
+little_cpu.alu.i_l[7:0]
+little_cpu.alu.i_r[7:0]
+@23
+[color] 3
+little_cpu.alu.o_out[7:0]
+@200
+-ACCUM
+@28
+[color] 1
+little_cpu.accum.i_ld
+@22
+little_cpu.accum.i_data[7:0]
+little_cpu.accum.value[7:0]
+@23
+[color] 3
+little_cpu.accum.o_data[7:0]
+@28
+little_cpu.accum.o_zero
+@200
+-PC
+@28
+[color] 1
+little_cpu.prog_ctr.i_ld
+@22
+little_cpu.prog_ctr.i_data[7:0]
+little_cpu.prog_ctr.value[7:0]
+@23
+[color] 3
+little_cpu.prog_ctr.o_data[7:0]
+[pattern_trace] 1
+[pattern_trace] 0

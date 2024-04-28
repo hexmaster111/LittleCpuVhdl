@@ -1,4 +1,5 @@
 module register #(parameter BITS = 8) (
+    input  wire            i_clk,
     input  wire            i_ld, 
     input  wire [BITS-1:0] i_data, 
     output wire [BITS-1:0] o_data
@@ -8,9 +9,10 @@ reg [BITS-1:0] value;
 /* verilator lint_on UNOPTFLAT */
 initial value = 0;
 
-always_ff begin
-    if(i_ld) value = i_data;    
-end    
+always @(posedge i_clk) begin
+    if(i_ld) 
+        value <= i_data;        
+end
 
 assign o_data = value;
 

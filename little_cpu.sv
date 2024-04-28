@@ -36,13 +36,14 @@ control ctrl (
     .o_ld_ir    (ld_ir),
     
     /*on mux, 0 = first*/
-    .o_mux_ir_p1    (mx_pc_ab),
-    .o_mux_mdr_alur (mx_accum_ab),
-    .o_mux_pc_ird   (mx_mar_ab),
+    .o_mux_PC_to_ir_p1    (mx_pc_ab),
+    .o_mux_ACC_to_mdr_alur (mx_accum_ab),
+    .o_mux_MAR_to_pc_ird   (mx_mar_ab),
     .o_alu_ctrl     (alu_ctrl)
 );
 
 register #(BITS) inst_reg ( 
+    .i_clk   (i_clk),
     .i_ld   (ld_ir),
     .i_data (mdr_reg_out),
     .o_data (inst_reg_out)
@@ -62,7 +63,8 @@ mux_2 mx_p1_inst_rg (
     .o_out   (pc_mx_wire)
 );
 
-register #(8)prog_ctr (            
+register #(8)prog_ctr (    
+    .i_clk   (i_clk),        
     .i_ld    (ld_pc),
     .i_data  (pc_mx_wire),
     .o_data  (pc_out)
@@ -81,6 +83,7 @@ mux_2 mx_ir_pc (
  );
  
 register mem_addr_reg ( 
+    .i_clk   (i_clk),
     .i_ld(ld_mar),
     .i_data(mx_ir_pc_mem_wire),
     .o_data(mar_to_mem_module_wire)
@@ -98,6 +101,7 @@ memory mem (
 );
 
 register#(BITS) mem_data_reg (
+    .i_clk   (i_clk),
     .i_ld(ld_mdr),
     .i_data(mem_to_mdr_reg_wire),
     .o_data(mdr_reg_out)
@@ -121,6 +125,7 @@ alu alu (
 );
 
 accum accum (
+    .i_clk(i_clk),
     .i_ld(ld_acc),
     .i_data(mx_to_accum_wire),
     .o_data(accum_out),
