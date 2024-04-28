@@ -2,8 +2,12 @@
 
 ## [Good stuff ive been reading too](https://inst.eecs.berkeley.edu/~cs150/sp12/resources/FSM.pdf)
 
+### using tst.sh
+- arg 1 mod name (ex alu)
 
+`./tst.sh little_cpu`
 
+## Cpu Stuff
 
 - 16 bit instructions
 - instructions have opcode in top 8 and address in the bottem 8
