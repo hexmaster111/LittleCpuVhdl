@@ -28,7 +28,7 @@ int main(int argc, char **argv, char **env)
 
         if (sim_time <= VERIF_START_TIME)
         {
-            dut->i_rst = 0;
+            dut->i_rst = 1;
         }
 
         dut->i_clk ^= 1;
