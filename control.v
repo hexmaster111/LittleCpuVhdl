@@ -87,6 +87,7 @@ always @(*) begin
             case (i_opcode)
                 OP_add : next_state = S_Exe_Alu_0; 
                 OP_xor : next_state = S_Exe_Alu_0;
+                OP_noop : next_state = S_Inc_0; //next inst
                 default: begin
                     $display("INVALID OPCODE! %d -- noop", i_opcode);
                     next_state = S_Inc_0;
@@ -107,8 +108,8 @@ always @(*) begin
             o_ld_mdr = 1;
 
             case (i_opcode)
-                OP_add : o_alu_ctrl = ALU_ADD;
-                OP_xor : o_alu_ctrl = ALU_XOR;  
+                OP_add  : o_alu_ctrl = ALU_ADD;
+                OP_xor  : o_alu_ctrl = ALU_XOR;
                 default: o_alu_ctrl = ALU_ADD; 
             endcase
              

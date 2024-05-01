@@ -89,8 +89,7 @@ register mem_addr_reg (
     .o_data (mar_to_mem_module_wire)
 );
 
-// memory mem ( 
-dbg_tbctrled_mem mem ( 
+memory mem ( 
     .i_clk  (i_clk),
     .i_rw   (mem_rw),
     // this truncates down so we only set the data side of the values from the alu
