@@ -22,13 +22,19 @@ int main(int argc, char **argv, char **env)
     m_trace->open("wv_little_cpu.vcd");
 
     int mem_values[] = {
-        /*       opcode v data    */
+        /** | OP | FEDCBA90 |
+         *  |ADD | 00000000 |
+         *  |XOR | 00000001 |
+         *
+         *
+         *
+         *       opcode v data    */
         /*       FEDCBA9076543210 */
-        /*00*/ 0b0000000100000000,
-        /*01*/ 0b1000000000000000,
-        /*02*/ 0b1000000000000000,
-        /*03*/ 0b1000000000000000,
-        /*04*/ 0b1000000000000000,
+        /*00*/ 0b0000000000000100,
+        /*01*/ 0b0000000000000101,
+        /*02*/ 0b0000000000000000,
+        /*03*/ 0b0000000000000000,
+        /*04*/ 0b0000000000000000, // hit here
         /*05*/ 0b0000000000000000,
         /*06*/ 0b0000000000000000,
         /*07*/ 0b0000000000000000,
@@ -39,7 +45,7 @@ int main(int argc, char **argv, char **env)
         /*0C*/ 0b0000000000000000,
         /*0D*/ 0b0000000000000000,
         /*0E*/ 0b0000000000000000,
-        /*0F*/ 0b0000000000000000,
+        /*0F*/ 0b0000000000000000, // exec halts here
         /*10*/ 0b0000000000000000,
         /*11*/ 0b0000000000000000,
         /*12*/ 0b0000000000000000,
@@ -85,7 +91,11 @@ int main(int argc, char **argv, char **env)
             *dataOut = mem_values[iaddr];
         }
 
-        fprintf(stdout, "RW: %-1d ADDR: %-5d OUT: %-5d\n", rw, iaddr, *dataOut);
+        fprintf(stdout, "RW: %-1d ADDR: %-5d OUT: %-5d @ %-5lu\n",
+                rw,
+                iaddr,
+                *dataOut,
+                sim_time);
 
         dut->i_clk ^= 1;
         dut->eval();
