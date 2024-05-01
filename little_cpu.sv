@@ -22,7 +22,7 @@ wire alu_ctrl;
 
 
 control ctrl (
-    .i_opcode   (inst_reg_out[7:0]), //[3:0]
+    .i_opcode   (inst_reg_out[15:8]), //[3:0]
     .i_clk      (i_clk),
     .i_rst      (i_rst),
     .i_acc_zero (acc_zero),
@@ -36,10 +36,10 @@ control ctrl (
     .o_ld_ir    (ld_ir),
     
     /*on mux, 0 = first*/
-    .o_mux_PC_to_ir_p1    (mx_pc_ab),
-    .o_mux_ACC_to_mdr_alur (mx_accum_ab),
-    .o_mux_MAR_to_pc_ird   (mx_mar_ab),
-    .o_alu_ctrl     (alu_ctrl)
+    .o_mux_PC_to_ir_p1      (mx_pc_ab),
+    .o_mux_ACC_to_mdr_alur  (mx_accum_ab),
+    .o_mux_MAR_to_pc_ird    (mx_mar_ab),
+    .o_alu_ctrl             (alu_ctrl)
 );
 
 register #(BITS) inst_reg ( 
@@ -76,29 +76,31 @@ wire [BITS-1:0] mem_to_mdr_reg_wire;
 
 //#mar
 mux_2 mx_ir_pc (
-    .i_ab_sw(mx_mar_ab),
-    .i_a(inst_reg_out[BITS-2:7]),
-    .i_b(pc_out),
-    .o_out(mx_ir_pc_mem_wire)
+    .i_ab_sw (mx_mar_ab),
+    .i_a     (inst_reg_out[BITS-2:7]),
+    .i_b     (pc_out),
+    .o_out   (mx_ir_pc_mem_wire)
  );
  
 register mem_addr_reg ( 
-    .i_clk   (i_clk),
-    .i_ld(ld_mar),
-    .i_data(mx_ir_pc_mem_wire),
-    .o_data(mar_to_mem_module_wire)
+    .i_clk  (i_clk),
+    .i_ld   (ld_mar),
+    .i_data (mx_ir_pc_mem_wire),
+    .o_data (mar_to_mem_module_wire)
 );
 
-memory mem ( 
-    .i_clk(i_clk),
-    .i_rw(mem_rw),
+// memory mem ( 
+dbg_tbctrled_mem mem ( 
+    .i_clk  (i_clk),
+    .i_rw   (mem_rw),
     // this truncates down so we only set the data side of the values from the alu
     /* verilator lint_off WIDTH */
-    .i_data(accum_out), 
+    .i_data (accum_out), 
     /* verilator lint_on WIDTH */
-    .i_addr(mar_to_mem_module_wire),
-    .o_data(mem_to_mdr_reg_wire)
+    .i_addr (mar_to_mem_module_wire),
+    .o_data (mem_to_mdr_reg_wire)
 );
+
 
 register#(BITS) mem_data_reg (
     .i_clk   (i_clk),
@@ -113,13 +115,13 @@ wire [7:0] mx_to_accum_wire, alu_out_wire;
 mux_2 mx_alur_mdr ( 
     .i_ab_sw(mx_accum_ab),
     .i_a(alu_out_wire),
-    .i_b(mdr_reg_out[BITS-2:7]),
+    .i_b(mdr_reg_out[7:0]), 
     .o_out(mx_to_accum_wire)
 );
 
 alu alu ( 
     .i_op(alu_ctrl),
-    .i_l(mdr_reg_out[BITS-2:7]),
+    .i_l(mdr_reg_out[7:0]), 
     .i_r(accum_out),
     .o_out(alu_out_wire)
 );
