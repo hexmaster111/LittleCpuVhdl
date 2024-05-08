@@ -31,14 +31,19 @@ localparam  //State
     S_Fetch_3    = 8'd3,
     S_Fetch_4    = 8'd4,
     
-    S_Inc_0      = 8'd10,
-    S_Inc_1      = 8'd11,
+    S_Inc_0      = 8'd05,
+    S_Inc_1      = 8'd06,
 
-    S_Exe_Alu_0  = 8'd20,
-    S_Exe_Alu_1  = 8'd21,
-    S_Exe_Alu_2  = 8'd22,
-    S_Exe_Alu_3  = 8'd23,
-    S_Exe_Alu_4  = 8'd24;
+    S_Exe_Alu_0  = 8'd9,
+    S_Exe_Alu_1  = 8'd10,
+    S_Exe_Alu_2  = 8'd11,
+    S_Exe_Alu_3  = 8'd12,
+    S_Exe_Alu_4  = 8'd13,
+    
+    S_Jmp_0      = 8'd15,
+    S_Jmp_1      = 8'd16,
+    S_Jmp_2      = 8'd17
+    ;
 
 
 reg [7:0] current_state, next_state;
@@ -87,6 +92,7 @@ always @(*) begin
             case (i_opcode)
                 OP_add : next_state = S_Exe_Alu_0; 
                 OP_xor : next_state = S_Exe_Alu_0;
+                OP_jmp : next_state = S_Jmp_0;
                 OP_noop : next_state = S_Inc_0; //next inst
                 default: begin
                     $display("INVALID OPCODE! %d -- noop", i_opcode);
@@ -136,6 +142,21 @@ always @(*) begin
         S_Inc_1:begin
             o_ld_pc = 1;
             next_state = S_Fetch_0;
+        end
+
+
+        S_Jmp_0:begin
+            next_state = S_Jmp_1;
+            o_mux_PC_to_ir_p1 = 0;
+        end
+        S_Jmp_1:begin
+            next_state = S_Jmp_2;
+            o_ld_pc = 1;
+        end
+        S_Jmp_2:begin
+            next_state = S_Fetch_4; //we dont want to fetch the next inst,
+                                    //we want to run where we jumped to
+            o_ld_pc = 0;
         end
 
         default: next_state = S_Fetch_0;

@@ -1,7 +1,8 @@
 localparam //Cpu Opcodes
     OP_noop = 8'd0,
     OP_add  = 8'd1,
-    OP_xor  = 8'd2;
+    OP_xor  = 8'd2,
+    OP_jmp  = 8'd5;
 
 localparam //alu opcodes
     ALU_XOR = 1,
